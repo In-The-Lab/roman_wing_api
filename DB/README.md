@@ -7,6 +7,7 @@ Install mySQL here: https://dev.mysql.com/downloads/mysql/ (you want to choose t
 Once that's downloaded, follow the installation instructions. Be sure to set a password you remember.
 
 Once that's done, type in the following commands:
+
 `echo 'export PATH=/usr/local/mysql/bin:$PATH' >> ~/.bash_profile`
 
 `. ~/.bash_profile`
