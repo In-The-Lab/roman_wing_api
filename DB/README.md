@@ -29,10 +29,11 @@ In this folder, create a file called `config.ini`. Don't worry, as long as you d
 The contents of your config.ini file should look something like this:
 
 ```
-user='root'
-database='romanwing'
-password='<YOUR_DATABASE_PASSWORD>'
-host='127.0.0.1'
+[MYSQL]
+user=root
+database=romanwing
+password=<YOUR_DATABASE_PASSWORD>
+host=127.0.0.1
 ```
 
-Run `pip install mysql-connector-python`, run test_db.py and see what's up. If it's wrong, just let me know.
+Run `pip install mysql-connector-python` (if you haven't installed the dependencies using setup.py), run test_db.py and see what's up. If it's wrong, just let me know.

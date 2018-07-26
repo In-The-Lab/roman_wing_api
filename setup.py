@@ -6,5 +6,6 @@ setup(name="roman_wing_API",
 	  author="In The Lab",
 	  install_requires=[
 	      "flask",
-	      "mysql-connector-python"
+	      "mysql-connector-python",
+	      "configparser"
 	  ])

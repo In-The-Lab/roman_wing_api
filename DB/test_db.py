@@ -1,15 +1,20 @@
-from mysql.connector import connection
+from mysql.connector import connection, Error
+import configparser
 
+config = configparser.ConfigParser()
+print("Loading config.ini...")
 try:
-    cnx = connection.MySQLConnection(user='root',
-                                     password='dbpassword',
-                                     host='127.0.0.1',
-                                     database='romanwing')
+    config.read("config.ini")
+except:
+    print("config.ini not found.")
+    exit()
+
+print("Connecting to database...")
+try:
+    cnx = connection.MySQLConnection(user=config["MYSQL"]["user"],
+                                     password=config["MYSQL"]["password"],
+                                     host=config["MYSQL"]["host"],
+                                     database=config["MYSQL"]["database"])
     print("All connected!")
-except mysql.connector.Error as err:
-    if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
-        print("Something is wrong with your user name or password")
-    elif err.errno == errorcode.ER_BAD_DB_ERROR:
-        print("Database does not exist")
-    else:
-        print(err)
+except Error as err:
+    print(err)
