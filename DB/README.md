@@ -32,4 +32,7 @@ The contents of your config.ini file should look something like this:
 user='root'
 database='romanwing'
 password='<YOUR_DATABASE_PASSWORD>'
+host='127.0.0.1'
 ```
+
+Run `pip install mysql-connector-python`, run test_db.py and see what's up. If it's wrong, just let me know.
