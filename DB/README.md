@@ -8,5 +8,7 @@ Once that's downloaded, follow the installation instructions. Be sure to set a p
 
 Once that's done, type in the following commands:
 `echo 'export PATH=/usr/local/mysql/bin:$PATH' >> ~/.bash_profile`
+
 `. ~/.bash_profile`
+
 You should be all set up with mySQL now. Just to test the installation, type in `mysql -u root -p`, press enter, type in your password, press enter, and you should be met with the mySQL console. To exit, just type in `\q` and press enter. 
