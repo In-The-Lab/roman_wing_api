@@ -21,3 +21,15 @@ You should be all set up with mySQL now. Just to test the installation, type in 
 Go to the command line, type in `mysql -u root -p`, and type in your database password.
 
 Execute the following command: `CREATE DATABASE romanwing;`, and you should have the database all created. Great! Now, type in `\q` to exit.
+
+## Putting your credentials somewhere
+
+In this folder, create a file called `config.ini`. Don't worry, as long as you don't fuck with the .gitignore file, your config file won't show up on github. Okay? Okay.
+
+The contents of your config.ini file should look something like this:
+
+```
+user='root'
+database='romanwing'
+password='<YOUR_DATABASE_PASSWORD>'
+```
