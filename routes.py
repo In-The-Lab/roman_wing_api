@@ -13,5 +13,6 @@ app = Flask(__name__)
 def do_nothing():
 	return "<h1>Hello, world!</h1>"
 
+# This just runs the API at port 5000.
 if __name__ == "__main__":
 	app.run(debug=True)
