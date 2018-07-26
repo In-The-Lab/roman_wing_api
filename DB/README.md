@@ -4,6 +4,7 @@ In order to get this stuff up and running, you need to have mySQL set up on your
 
 
 Install mySQL here: https://dev.mysql.com/downloads/mysql/ (you want to choose the DMG archive)
+
 Once that's downloaded, follow the installation instructions. Be sure to set a password you remember.
 
 Once that's done, type in the following commands:
