@@ -9,6 +9,6 @@ The services folder will have all the functions that verify permissions, etc, th
 
 Finally, routes.py will have all the necessary routes, and the functions that interact with the services in the services folder.
 
-# Installing dependencies
+## Installing dependencies
 
 run `python setup.py develop`, and you should be good.
