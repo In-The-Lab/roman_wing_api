@@ -21,3 +21,7 @@ You should be all set up with mySQL now. Just to test the installation, type in 
 Go to the command line, type in `mysql -u root -p`, and type in your database password.
 
 Execute the following command: `CREATE DATABASE romanwing;`, and you should have the database all created. Great! Now, type in `\q` to exit.
+
+## Committing changes to tables
+
+run `python dbutils.py --migrate --clean` to clear the database and commit your changes.
