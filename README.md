@@ -12,3 +12,16 @@ Finally, routes.py will have all the necessary routes, and the functions that in
 ## Installing dependencies
 
 run `python setup.py develop`, and you should be good.
+
+## Getting set up and all that
+
+First of all, follow the instructions in the README in db to get mySQL all installed and set up.
+
+Make a folder called "config", and put a file called "config.ini" inside it with your mySQL credentials. It should look something like this:
+```
+[MYSQL]
+user=root
+database=romanwing
+password=<YOUR_DATABASE_PASSWORD>
+host=127.0.0.1
+```

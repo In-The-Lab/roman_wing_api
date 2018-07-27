@@ -1,11 +1,14 @@
 from mysql.connector import connection, Error
-from migrations import tables
+try:
+    from .migrations import tables
+except:
+    from migrations import tables
 import configparser
 import sys
 
 def get_db_config():
     config = configparser.ConfigParser()
-    config.read("config.ini")
+    config.read("../config/config.ini")
     user = config["MYSQL"]["user"]
     pword = config["MYSQL"]["password"]
     host = config["MYSQL"]["host"]

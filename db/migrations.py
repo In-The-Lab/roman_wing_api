@@ -11,6 +11,15 @@ tables["users"] = (
 	"PRIMARY KEY (id))"
 )
 
+tables["user_auth"] = (
+	"CREATE TABLE `user_auth` ("
+	"`id` INT NOT NULL AUTO_INCREMENT, "
+	"`hash` VARCHAR(128) NOT NULL, "
+	"`user_id` INT NOT NULL, "
+	"FOREIGN KEY (`user_id`) REFERENCES `users` (`id`), "
+	"PRIMARY KEY (`id`))"
+	)
+
 tables["posts"] = (
 	"CREATE TABLE `posts` ("
 	"`id` int NOT NULL AUTO_INCREMENT, "
