@@ -27,5 +27,3 @@ class UserDAO:
         for (id_, first_name, last_name, email, is_admin, date_created) in cursor:
             usrs.append(User(id_, first_name, last_name, email, is_admin, date_created))
         return usrs[0]
-
-print(UserDAO.get_user(1))
