@@ -10,5 +10,6 @@ setup(name="roman_wing_API",
 	      "mysql-connector-python",
 	      "configparser",
 	      "pytz",
-	      "bcrypt"
+	      "bcrypt",
+	      "PyJWT"
 	  ])

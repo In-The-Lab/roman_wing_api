@@ -17,15 +17,15 @@ class UserDAO:
         cnx.commit()
 
     @staticmethod
-    def get_user(id):
+    def get_user(id_):
         cnx, cursor = get_db_connection(*get_db_config())
         cursor.execute(("SELECT "
                         "id, first_name, last_name, email, is_admin, date_created "
                         "FROM users "
-                        "WHERE id={}".format(id)))
+                        "WHERE id={}".format(id_)))
         usrs = []
-        for (id_, first_name, last_name, email, is_admin, date_created) in cursor:
-            usr = User(id_, first_name, last_name, email,
+        for (id__, first_name, last_name, email, is_admin, date_created) in cursor:
+            usr = User(id__, first_name, last_name, email,
                              is_admin, date_created)
             usrs.append(usr)
         if len(usrs) == 0:
@@ -36,9 +36,9 @@ class UserDAO:
     def get_user_by_email(email):
         cnx, cursor = get_db_connection(*get_db_config())
         cmd = (("SELECT "
-                        "id, first_name, last_name, email, is_admin, date_created "
-                        "FROM users "
-                        "WHERE email=\'{}\'".format(email)))
+                "id, first_name, last_name, email, is_admin, date_created "
+                "FROM users "
+                "WHERE email=\'{}\'".format(email)))
         cursor.execute(cmd)
         usrs = []
         for (id_, first_name, last_name, email, is_admin, date_created) in cursor:
@@ -48,6 +48,31 @@ class UserDAO:
         if len(usrs) == 0:
             return None
         return usrs[0]
+
+    @staticmethod
+    def get_posts(id_):
+        cnx, cursor = get_db_connection(*get_db_config())
+        cmd = (("SELECT "
+                "id, creator_id, body, date_created "
+                "FROM posts "
+                "WHERE creator_id={}".format(id_)))
+        cursor.execute(cmd)
+        posts = []
+        for (id__, creator_id, body, date_created) in cursor:
+            post = Post(id__, creator_id, body, date_created)
+            posts.append(post)
+        return posts
+
+class PostDAO:
+
+    def insert_post(creator_id, body):
+        cnx, cursor = get_db_connection(*get_db_config())
+        cmd = (
+            "INSERT INTO posts "
+            "(creator_id, body, date_created) "
+            "VALUES ({}, \'{}\', CURDATE())",format(creator_id, body))
+        cursor.execute(cmd)
+        cnx.commit()
 
 class AuthDAO:
 

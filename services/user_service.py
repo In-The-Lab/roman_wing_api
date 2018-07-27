@@ -1,11 +1,12 @@
 from db.dao import UserDAO, AuthDAO
+from tokens.tokens import create_user_token
 from email.utils import parseaddr
+from tokens.tokens import create_user_token, get_id_from_token
 import bcrypt
 import json
 import re
 
 def get_user(email):
-	# TODO: make use of user token
 	try:
 		usr = UserDAO.get_user_by_email(email)
 		return usr.to_json()
@@ -40,5 +41,9 @@ def validate_user(email, password):
 		return (404, None)
 	if bcrypt.checkpw(password.encode('utf-8'), hash_):
 		# TODO: create user token
-		return (200, "token")
+		return (200, create_user_token(usr.id, usr.is_admin))
 	return (401, None)
+
+def get_posts(id_):
+	posts = UserDAO.get_posts(id_)
+	return json.dumps([post.to_json for post in posts])

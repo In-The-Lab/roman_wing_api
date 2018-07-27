@@ -25,6 +25,7 @@ tables["posts"] = (
 	"`id` int NOT NULL AUTO_INCREMENT, "
 	"`creator_id` int NOT NULL, "
 	"`body` TEXT NOT NULL, "
+	"`date_created` DATETIME NOT NULL, "
 	"FOREIGN KEY (`creator_id`) REFERENCES `users` (`id`), "
 	"PRIMARY KEY (`id`))"
 )
