@@ -36,7 +36,6 @@ def clean_database():
     cursor.execute("DROP DATABASE `{}`".format(db))
     cursor.execute("CREATE DATABASE `{}`".format(db))
 
-
 def apply_migration():
     cnx, cursor = get_db_connection(*get_db_config())
     for table_name in tables.keys():
