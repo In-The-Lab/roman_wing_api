@@ -30,7 +30,7 @@ class User:
                     self.last_name,
                     self.email,
                     self.date_created)
-            )
+        )
 
 class Post:
 

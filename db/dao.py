@@ -50,6 +50,17 @@ class UserDAO:
         return usrs[0]
 
     @staticmethod
+    def update_user(id_, first_name, last_name, email):
+        cnx, cursor = get_db_connection(*get_db_config())
+        cmd = (
+            "UPDATE users SET"
+            "first_name=\'{}\', last_name=\'{}\', "
+            "email=\'{}\'"
+            "WHERE id={}".format(first_name, last_name, email, id_))
+        cursor.execute(cmd)
+        cnx.commit()
+
+    @staticmethod
     def get_posts(id_):
         cnx, cursor = get_db_connection(*get_db_config())
         cmd = (("SELECT "
@@ -83,6 +94,18 @@ class AuthDAO:
             "INSERT INTO user_auth "
             "(hash, user_id) "
             "VALUES (\'{}\', \'{}\')".format(hash_.decode('utf8'), user_id)
+            )
+        print(cmd)
+        cursor.execute(cmd)
+        cnx.commit()
+
+    @staticmethod
+    def update_hash(user_id, hash_):
+        cnx, cursor = get_db_connection(*get_db_config())
+        cmd = (
+            "UPDATE user_auth SET "
+            "hash=\'{}\', user_id=\'{}\' "
+            "WHERE user_id={}".format(hash_.decode('utf8'), user_id)
             )
         print(cmd)
         cursor.execute(cmd)
