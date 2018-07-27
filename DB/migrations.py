@@ -6,6 +6,7 @@ tables["users"] = (
 	"`first_name` VARCHAR(16) NOT NULL, "
 	"`last_name` VARCHAR(16) NOT NULL, "
 	"`email` VARCHAR(64) NOT NULL, "
+	"`is_admin` BOOLEAN NOT NULL, "
 	"`date_created` TIMESTAMP NOT NULL, "
 	"PRIMARY KEY (id))"
 )

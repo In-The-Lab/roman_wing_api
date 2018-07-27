@@ -1,7 +1,7 @@
+from mysql.connector import connection, Error
 from migrations import tables
 import configparser
 import sys
-from mysql.connector import connection, Error
 
 def get_db_config():
     config = configparser.ConfigParser()
@@ -12,28 +12,33 @@ def get_db_config():
     db = config["MYSQL"]["database"]
     return user, pword, host, db
 
+def get_db_connection(user, pword, host, db, clean=False):
+    if not clean:
+        cnx = connection.MySQLConnection(user=user,
+                                         password=pword,
+                                         host=host,
+                                         database=db)
+    else:
+        cnx = connection.MySQLConnection(user=user,
+                                         password=pword,
+                                         host=host)
+    cursor = cnx.cursor()
+    return cnx, cursor
+
 def clean_database():
     '''
         WARNING:
         ALL DATA IN THE DATABASE WILL BE WIPED
         WHEN THIS COMMAND IS CALLED. BE WARNED.
     '''
-    user, pword, host, db = get_db_config()
-    cnx = connection.MySQLConnection(user=user,
-                                 password=pword,
-                                 host=host)
-    cursor = cnx.cursor()
+    db = get_db_config()[3] # need db name
+    cnx, cursor = get_db_connection(*get_db_config(), clean=True)
     cursor.execute("DROP DATABASE `{}`".format(db))
     cursor.execute("CREATE DATABASE `{}`".format(db))
 
 
 def apply_migration():
-    user, pword, host, db = get_db_config()
-    cnx = connection.MySQLConnection(user=user,
-                                 password=pword,
-                                 host=host,
-                                 database=db)
-    cursor = cnx.cursor()
+    cnx, cursor = get_db_connection(*get_db_config())
     for table_name in tables.keys():
         cmd = tables[table_name]
         print("Creating table " + table_name + "...")
