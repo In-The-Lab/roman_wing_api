@@ -10,17 +10,6 @@ class User:
         self.email = email
         self.is_admin = is_admin
         self.date_created = date_created
-
-    def to_json(self):
-        features = {
-            "id": self.id,
-            "first_name": self.first_name,
-            "last_name": self.last_name,
-            "email": self.email,
-            "date_created": str(self.date_created)
-        }
-        return json.dumps(features)
-
     def __str__(self):
         return (
             "{} {}:\n"
@@ -41,14 +30,17 @@ class Post:
         self.date_created = date_created
         self.thumbnail_url = thumbnail_url
 
-    def to_json(self):
-        features = {
-            "id": self.id,
-            "creator_id": creator_id,
-            "body": self.body,
-            "date_created": self.date_created
-        }
-        return json.dumps(features)
-
     def __str__(self):
         return self.body
+
+class Event:
+
+    def __init__(self, id_, event_name, event_description, date, location):
+        self.id = id_
+        self.event_name = event_name
+        self.event_description = event_description
+        self.date = date
+        self.location = location
+
+    def __str__(self):
+        return self.event_name + ": " + self.event_description

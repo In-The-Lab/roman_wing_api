@@ -1,5 +1,5 @@
 from .dbutils import get_db_config, get_db_connection
-from .models import User
+from .models import User, Post, Event
 
 class UserDAO:
 
@@ -93,6 +93,7 @@ class UserDAO:
 
 class PostDAO:
 
+    @staticmethod
     def insert_post(creator_id, body):
         cnx, cursor = get_db_connection(*get_db_config())
         cmd = (
@@ -102,18 +103,42 @@ class PostDAO:
         cursor.execute(cmd)
         cnx.commit()
 
+        @staticmethod
     def get_all_posts():
         cnx, cursor = get_db_connection(*get_db_config())
         cmd = (
             "SELECT id, creator_id, body, date_created, thumbnail_url "
-            "FROM posts"
-        )
+            "FROM posts")
         cursor.execute(cmd)
         posts = []
         for (id_, creator_id, body, date_created, thumbnail_url) in cursor:
             post = Post(id__, creator_id, body, date_created, thumbnail_url)
             posts.append(post)
         return posts
+
+class EventDAO:
+
+    @staticmethod
+    def create_event(name, description, date, location):
+        cnx, cursor = get_db_connection(*get_db_config())
+        cmd = (
+            "INSERT INTO events "
+            "(event_name, event_description, date, location) "
+            "VALUES ({}, {}, {}, {})".format(name, description, date, location))
+        cursor.execute(cmd)
+        cnx.commit()
+
+    @staticmethod
+    def get_all_future_events():
+        cnx, cursor = get_db_connection(*get_db_config())
+        cmd  = (
+            "SELECT id, event_name, event_description, date, location "
+            "FROM events WHERE date>CURDATE()")
+        events = []
+        for (id_, event_name, event_description, date, location) in cursor:
+            event = Event(id_, event_name, event_description, date, location)
+            events.append(event)
+        return events
 
 class AuthDAO:
 

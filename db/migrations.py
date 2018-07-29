@@ -33,7 +33,7 @@ tables["posts"] = (
 
 tables["saved_articles"] = (
     "CREATE TABLE `saved_posts` ("
-    "`id` INT NOT NULL, "
+    "`id` INT NOT NULL AUTO_INCREMENT, "
     "`post_id` INT NOT NULL, "
     "`user_id` INT NOT NULL, "
     "FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`), "
@@ -43,10 +43,10 @@ tables["saved_articles"] = (
 
 tables["events"] = (
     "CREATE TABLE `events` ("
-    "`id` INT NOT NULL, "
-    "`creator_id` INT NOT NULL, "
+    "`id` INT NOT NULL AUTO_INCREMENT, "
+    "`event_name` VARCHAR(256) NOT NULL, "
+    "`event_description` TEXT NOT NULL, "
     "`date` DATETIME NOT NULL, "
     "`location` VARCHAR(128) NOT NULL, "
-    "FOREIGN KEY (`creator_id`) REFERENCES `users` (`id`), "
     "PRIMARY KEY (`id`))"
 )
