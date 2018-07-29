@@ -34,11 +34,12 @@ class User:
 
 class Post:
 
-    def __init__(self, id_, creator_id, body, date_created):
+    def __init__(self, id_, creator_id, body, date_created, thumbnail_url):
         self.id = id_
         self.creator_id = creator_id
         self.body = body
         self.date_created = date_created
+        self.thumbnail_url = thumbnail_url
 
     def to_json(self):
         features = {

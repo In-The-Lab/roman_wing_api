@@ -14,7 +14,7 @@ tables["users"] = (
 tables["user_auth"] = (
     "CREATE TABLE `user_auth` ("
     "`id` INT NOT NULL AUTO_INCREMENT, "
-    "`hash` VARCHAR(128) NOT NULL, "
+    "`hash` VARCHAR(256) NOT NULL, "
     "`user_id` INT NOT NULL, "
     "FOREIGN KEY (`user_id`) REFERENCES `users` (`id`), "
     "PRIMARY KEY (`id`))"
@@ -25,6 +25,7 @@ tables["posts"] = (
     "`id` int NOT NULL AUTO_INCREMENT, "
     "`creator_id` int NOT NULL, "
     "`body` TEXT NOT NULL, "
+    "`thumbnail_url` VARCHAR(256) NOT NULL, "
     "`date_created` DATETIME NOT NULL, "
     "FOREIGN KEY (`creator_id`) REFERENCES `users` (`id`), "
     "PRIMARY KEY (`id`))"
@@ -37,5 +38,15 @@ tables["saved_articles"] = (
     "`user_id` INT NOT NULL, "
     "FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`), "
     "FOREIGN KEY (`user_id`) REFERENCES `users` (`id`), "
+    "PRIMARY KEY (`id`))"
+)
+
+tables["events"] = (
+    "CREATE TABLE `events` ("
+    "`id` INT NOT NULL, "
+    "`creator_id` INT NOT NULL, "
+    "`date` DATETIME NOT NULL, "
+    "`location` VARCHAR(128) NOT NULL, "
+    "FOREIGN KEY (`creator_id`) REFERENCES `users` (`id`), "
     "PRIMARY KEY (`id`))"
 )

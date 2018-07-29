@@ -64,13 +64,30 @@ class UserDAO:
     def get_posts(id_):
         cnx, cursor = get_db_connection(*get_db_config())
         cmd = (("SELECT "
-                "id, creator_id, body, date_created "
+                "id, creator_id, body, date_created, thumbnail_url "
                 "FROM posts "
                 "WHERE creator_id={}".format(id_)))
         cursor.execute(cmd)
         posts = []
-        for (id__, creator_id, body, date_created) in cursor:
-            post = Post(id__, creator_id, body, date_created)
+        for (id__, creator_id, body, date_created, thumbnail_url) in cursor:
+            post = Post(id__, creator_id, body, date_created, thumbnail_url)
+            posts.append(post)
+        return posts
+
+    @staticmethod
+    def get_saved_posts(id_):
+        cnx, cursor = get_db_connection(*get_db_config())
+        cmd = (
+            "SELECT "
+            "posts.id, posts.creator_id, posts.body, "
+            "posts.date_created, posts.thumbnail_url "
+            "FROM saved_articles "
+            "INNER JOIN posts ON saved_articles.post_id=posts.id "
+            "WHERE saved_articles.user_id={}".format(id_))
+        cursor.execute(cmd)
+        posts = []
+        for (id__, creator_id, body, date_created, thumbnail_url) in cursor:
+            post = Post(id__, creator_id, body, date_created, thumbnail_url)
             posts.append(post)
         return posts
 
@@ -85,6 +102,19 @@ class PostDAO:
         cursor.execute(cmd)
         cnx.commit()
 
+    def get_all_posts():
+        cnx, cursor = get_db_connection(*get_db_config())
+        cmd = (
+            "SELECT id, creator_id, body, date_created, thumbnail_url "
+            "FROM posts"
+        )
+        cursor.execute(cmd)
+        posts = []
+        for (id_, creator_id, body, date_created, thumbnail_url) in cursor:
+            post = Post(id__, creator_id, body, date_created, thumbnail_url)
+            posts.append(post)
+        return posts
+
 class AuthDAO:
 
     @staticmethod
@@ -93,8 +123,7 @@ class AuthDAO:
         cmd = (
             "INSERT INTO user_auth "
             "(hash, user_id) "
-            "VALUES (\'{}\', \'{}\')".format(hash_.decode('utf8'), user_id)
-            )
+            "VALUES (\'{}\', \'{}\')".format(hash_.decode('utf8'), user_id))
         print(cmd)
         cursor.execute(cmd)
         cnx.commit()
